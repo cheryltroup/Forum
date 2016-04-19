@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
 	before_action :find_post, only: [:show, :edit, :update, :destroy]
+	before_action :authenticate_user!, except: [:index, :show]
 
 
 	def index
@@ -11,7 +12,7 @@ class PostsController < ApplicationController
 
 	def new
 		#@post = Post.new
-		@post = current_user.post.build
+		@post = current_user.posts.build
 	end
 
 	def create
